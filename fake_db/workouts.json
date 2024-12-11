@@ -1,0 +1,22 @@
+[
+    {
+        "name": "some chest workout",
+        "exercises": [
+            "idk",
+            "idk2"
+        ]
+    },
+    {
+        "name": "new workout",
+        "exercises": [
+            "plank",
+            "pushup"
+        ]
+    },
+    {
+        "name": "string",
+        "exercises": [
+            "string"
+        ]
+    }
+]
