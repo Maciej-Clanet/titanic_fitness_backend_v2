@@ -1,7 +1,7 @@
 import json
 from fastapi import APIRouter, HTTPException
 
-from models.auth_models import RegisterForm
+from models.auth_models import LoginForm, RegisterForm
 
 auth_router = APIRouter()
 
@@ -37,6 +37,15 @@ def register(register_data: RegisterForm):
 
 
 @auth_router.post("/login")
-def login():
-    return {}
+def login(login_data: LoginForm):
+    all_users = get_all_users()
+    email = login_data.email
+
+    if email not in all_users:
+        raise HTTPException(401,"Invalid Credentials")
+    
+    if all_users[email]["password"] != login_data.password:
+        raise HTTPException(401,"Invalid Credentials")
+    
+    return all_users[email]
 
