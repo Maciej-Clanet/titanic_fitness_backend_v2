@@ -3,5 +3,40 @@
         "email": "goober@gmail.com",
         "password": "1234",
         "username": "goober"
+    },
+    "fsafsaf@asfsaf": {
+        "email": "fsafsaf@asfsaf",
+        "username": "dasfasfsa",
+        "password": "dasf"
+    },
+    "dsafsa@fafa": {
+        "email": "dsafsa@fafa",
+        "username": "dafsa",
+        "password": "dsadfas"
+    },
+    "gooberdsafasfgsa@gmail.com": {
+        "email": "gooberdsafasfgsa@gmail.com",
+        "username": "fadfagda",
+        "password": "dasfaf"
+    },
+    "gooberino@gmail.com": {
+        "email": "gooberino@gmail.com",
+        "username": "goooooob",
+        "password": "1234"
+    },
+    "fdasfgafsa@fsaf": {
+        "email": "fdasfgafsa@fsaf",
+        "username": "fdasfasf",
+        "password": "fasfas"
+    },
+    "string": {
+        "email": "string",
+        "password": "string",
+        "username": "string"
+    },
+    "string3": {
+        "email": "string3",
+        "password": "string",
+        "username": "string"
     }
 }
