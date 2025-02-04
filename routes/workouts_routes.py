@@ -1,7 +1,10 @@
 import json
 from typing import List
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
+
+from models.workout_models import GetDay
+from .auth_routes import get_all_users
 
 workouts_router = APIRouter()
 
@@ -31,3 +34,23 @@ def add_workout(new_workout: Workout):
         file.write(json.dumps(all_workouts, indent=4))
 
     return all_workouts
+
+
+
+@workouts_router.post("/workout_day")
+def get_workout_day(data: GetDay):
+
+    all_users = get_all_users()
+    
+    if data.user_email not in all_users:
+        raise HTTPException(404, "no user found")
+    
+    user = all_users[data.user_email]
+
+    # get workout day
+    workouts = user["workouts"]
+
+    day = workouts.get(data.date, {})
+    # get allows us to specify a default if it doesnt exist
+
+    return day
