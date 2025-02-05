@@ -3,6 +3,36 @@
         "email": "string",
         "password": "string",
         "username": "string",
-        "workouts": {}
+        "workouts": {
+            "05/02/2025": {
+                "exercises": {
+                    "test": [
+                        {
+                            "reps": 0,
+                            "weight": 0.0
+                        },
+                        {
+                            "reps": 0,
+                            "weight": 0.0
+                        }
+                    ],
+                    "tesfsafsat": [
+                        {
+                            "reps": 0,
+                            "weight": 0.0
+                        },
+                        {
+                            "reps": 0,
+                            "weight": 0.0
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "string2": {
+        "email": "string",
+        "password": "string",
+        "username": "string"
     }
 }
