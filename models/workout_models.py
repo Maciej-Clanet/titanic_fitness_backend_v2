@@ -23,3 +23,12 @@ class WorkoutDay(BaseModel):
 
 class Workouts(BaseModel):
     workouts: Dict[str, WorkoutDay]
+
+
+
+class AddExercise(BaseModel): 
+    user_email: str 
+    date: str 
+    exercise_name: str 
+    reps: int 
+    weight: float 

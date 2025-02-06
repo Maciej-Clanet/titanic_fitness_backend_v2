@@ -1,10 +1,11 @@
 import json
 from typing import List
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from models.workout_models import GetDay
-from .auth_routes import get_all_users
+from models.workout_models import AddExercise, GetDay, WorkoutDay
+from .auth_routes import get_all_users, save_users
 
 workouts_router = APIRouter()
 
@@ -37,7 +38,7 @@ def add_workout(new_workout: Workout):
 
 
 
-@workouts_router.post("/workout_day")
+@workouts_router.post("/workout_day", response_model=WorkoutDay)
 def get_workout_day(data: GetDay):
 
     all_users = get_all_users()
@@ -50,7 +51,43 @@ def get_workout_day(data: GetDay):
     # get workout day
     workouts = user["workouts"]
 
-    day = workouts.get(data.date, {})
+    day = workouts.get(data.date, {"exercises": {}})
     # get allows us to specify a default if it doesnt exist
 
     return day
+
+
+
+@workouts_router.post("/add_exercise") 
+def add_exercise(data: AddExercise): 
+    
+    all_users = get_all_users() 
+
+    # error if user doesn't exist 
+    if data.user_email not in all_users: 
+        raise HTTPException(404, "no user found") 
+
+    user = all_users[data.user_email] 
+    workouts = user["workouts"] 
+
+    if data.date not in workouts: 
+        print("didnt find day field for this date") 
+        workouts[data.date] = {"exercises": {}} 
+
+    exercises = workouts[data.date]["exercises"]
+    
+    if data.exercise_name not in exercises: 
+        print("no existing entry for exercise, initialising with empty list") 
+        exercises[data.exercise_name] = [] 
+
+    # we create an exercise entry object to save 
+    new_entry = {"reps": data.reps, "weight": data.weight} 
+    # append it to the exercise 
+    exercises[data.exercise_name].append(new_entry) 
+
+    save_users(all_users) 
+
+    # 201 code stands for "created" 
+    return JSONResponse( 
+        status_code=201, content={"message": "Exercise added successfully"} 
+    ) 
